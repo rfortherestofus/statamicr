@@ -9,7 +9,7 @@
 #' @importFrom httr2 request req_perform resp_body_json
 #'
 get_users_page <- function(url, page, limit) {
-  # init step -> get number of request to do
+  # request page
   req_request <-
     request(paste0(url, "/api/users/?limit=", limit, "&page=", page)) |>
     req_perform() |>
@@ -43,7 +43,7 @@ get_users <- function(url, limit = 100) {
   nb_users <- param_request$meta$total
 
   # request all pages
-  json_users <- lapply(seq(1, 5874 / limit + 1, 1),
+  json_users <- lapply(seq(1, nb_users / limit + 1, 1),
                        \(x)get_users_page(
                          url = url,
                          page = x,
