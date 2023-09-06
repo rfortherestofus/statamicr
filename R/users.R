@@ -30,6 +30,7 @@ get_users_page <- function(url, page, limit) {
 #'
 #' @importFrom tibble tibble
 #' @importFrom tidyr unnest_wider
+#' @importFrom purrr map
 #' @importFrom httr2 request req_perform resp_body_json
 #'
 get_users <- function(url, limit = 100) {
@@ -43,12 +44,15 @@ get_users <- function(url, limit = 100) {
   nb_users <- param_request$meta$total
 
   # request all pages
-  json_users <- lapply(seq(1, nb_users / limit + 1, 1),
-                       \(x)get_users_page(
-                         url = url,
-                         page = x,
-                         limit = limit
-                       )) |>
+  json_users <- purrr::map(
+    seq(1, nb_users / limit + 1, 1),
+    \(x)get_users_page(
+      url = url,
+      page = x,
+      limit = limit
+    ),
+    .progress = TRUE
+  ) |>
     unlist(recursive = FALSE)
 
   # format

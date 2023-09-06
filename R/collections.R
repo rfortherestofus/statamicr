@@ -66,6 +66,7 @@ get_collection_page <- function(url, collection, page, limit) {
 #'
 #' @importFrom tibble tibble
 #' @importFrom tidyr unnest_wider
+#' @importFrom purrr map
 #' @importFrom httr2 request req_perform resp_body_json
 #'
 get_collection <- function(url, collection, limit = 10) {
@@ -74,14 +75,15 @@ get_collection <- function(url, collection, limit = 10) {
     get_collection_params(url = url, collection = collection)
 
   # request all pages
-  json_collection <- lapply(
+  json_collection <-  purrr::map(
     seq(1, nb_items / limit + 1, 1),
     \(x)get_collection_page(
       url = url,
       collection = collection,
       page = x,
       limit = limit
-    )
+    ),
+    .progress = TRUE
   ) |>
     unlist(recursive = FALSE)
 
@@ -89,3 +91,4 @@ get_collection <- function(url, collection, limit = 10) {
   tibble::tibble(col = json_collection) |>
     tidyr::unnest_wider(col)
 }
+
