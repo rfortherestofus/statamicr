@@ -45,8 +45,7 @@ get_collection_page <- function(url, collection, page, limit) {
         "/entries/?limit=",
         limit,
         "&page=",
-        page,
-        filter_string
+        page
       )
     ) |>
     req_perform() |>
@@ -109,6 +108,7 @@ get_collection <- function(url, collection, limit = 10) {
 #' @importFrom purrr map_chr
 #' @importFrom httr2 request req_perform resp_body_json
 #' @importFrom dplyr mutate
+#' @importFrom rlang .data
 #'
 get_collection_list <- function(url, collection, custom_fields = ""){
   # filter collection on ID and title
@@ -125,6 +125,6 @@ get_collection_list <- function(url, collection, custom_fields = ""){
   # format
   tibble::tibble(col = json_collection_list$data) |>
     tidyr::unnest_wider(col) |>
-    dplyr::mutate(id = purrr::map_chr(id,
+    dplyr::mutate(id = purrr::map_chr(.data$id,
                     as.character))
 }
