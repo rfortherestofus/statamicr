@@ -45,7 +45,8 @@ get_collection_page <- function(url, collection, page, limit) {
         "/entries/?limit=",
         limit,
         "&page=",
-        page
+        page,
+        filter_string
       )
     ) |>
     req_perform() |>
@@ -54,6 +55,7 @@ get_collection_page <- function(url, collection, page, limit) {
   # return JSON data part
   req_request$data
 }
+
 
 #' Get all entries in a collection
 #'
@@ -92,3 +94,37 @@ get_collection <- function(url, collection, limit = 10) {
     tidyr::unnest_wider(col)
 }
 
+
+#' Get ID and titles of items in collection
+#'
+#' @param url Website URL
+#' @param collection Collection name
+#' @param custom_fields Custom fiels added, separated by , (also for the start)
+#'
+#' @return A dataframe with fields
+#' @export
+#'
+#' @importFrom tibble tibble
+#' @importFrom tidyr unnest_wider
+#' @importFrom purrr map_chr
+#' @importFrom httr2 request req_perform resp_body_json
+#' @importFrom dplyr mutate
+#'
+get_collection_list <- function(url, collection, custom_fields = ""){
+  # filter collection on ID and title
+  json_collection_list <- request(paste0(
+   url,
+    "/api/collections/",
+   collection,
+    "/entries?fields=id,title",
+   custom_fields
+  )) |>
+    req_perform() |>
+    resp_body_json()
+
+  # format
+  tibble::tibble(col = json_collection_list$data) |>
+    tidyr::unnest_wider(col) |>
+    dplyr::mutate(id = purrr::map_chr(id,
+                    as.character))
+}
