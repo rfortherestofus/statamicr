@@ -116,7 +116,7 @@ get_collection_list <- function(url, collection, custom_fields = ""){
    url,
     "/api/collections/",
    collection,
-    "/entries?fields=id,title",
+    "/entries?limit=10000&fields=id,title",
    custom_fields
   )) |>
     req_perform() |>
