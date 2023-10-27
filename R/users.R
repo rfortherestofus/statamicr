@@ -7,7 +7,7 @@
 #'
 #' @keywords internal
 #'
-#' @importFrom httr2 request req_perform resp_body_json
+#' @importFrom httr2 request req_perform resp_body_json req_auth_bearer_token
 #'
 get_users_page <- function(url, page, limit, token) {
   # request page
@@ -34,7 +34,7 @@ get_users_page <- function(url, page, limit, token) {
 #' @importFrom tibble tibble
 #' @importFrom tidyr unnest_wider
 #' @importFrom purrr map
-#' @importFrom httr2 request req_perform resp_body_json
+#' @importFrom httr2 request req_perform resp_body_json req_auth_bearer_token
 #'
 get_users <- function(url, limit = 100, token) {
   # init step -> get number of request to do

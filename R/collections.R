@@ -6,7 +6,7 @@
 #'
 #' @keywords internal
 #'
-#' @importFrom httr2 request req_perform resp_body_json
+#' @importFrom httr2 request req_perform resp_body_json req_auth_bearer_token
 #'
 get_collection_params <- function(url, collection, token) {
   # init step -> get number of request to do
@@ -17,6 +17,7 @@ get_collection_params <- function(url, collection, token) {
       collection,
       "/entries/?limit=1&page=1"
     )) |>
+    req_auth_bearer_token(token = token) |>
     req_perform() |>
     resp_body_json()
 
@@ -34,7 +35,7 @@ get_collection_params <- function(url, collection, token) {
 #'
 #' @keywords internal
 #'
-#' @importFrom httr2 request req_perform resp_body_json
+#' @importFrom httr2 request req_perform resp_body_json req_auth_bearer_token
 #'
 get_collection_page <-
   function(url, collection, page, limit, token) {
@@ -114,7 +115,7 @@ get_collection <- function(url, collection, limit = 10, token) {
 #' @importFrom tibble tibble
 #' @importFrom tidyr unnest_wider
 #' @importFrom purrr map_chr
-#' @importFrom httr2 request req_perform resp_body_json
+#' @importFrom httr2 request req_perform resp_body_json req_auth_bearer_token
 #' @importFrom dplyr mutate
 #' @importFrom rlang .data
 #'
