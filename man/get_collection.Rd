@@ -4,7 +4,7 @@
 \alias{get_collection}
 \title{Get all entries in a collection}
 \usage{
-get_collection(url, collection, limit = 10)
+get_collection(url, collection, limit = 10, token)
 }
 \arguments{
 \item{url}{Website URL}
@@ -12,6 +12,8 @@ get_collection(url, collection, limit = 10)
 \item{collection}{Collection name}
 
 \item{limit}{Number of item by page}
+
+\item{token}{Bearer token}
 }
 \value{
 A dataframe with users data

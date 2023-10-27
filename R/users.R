@@ -3,15 +3,17 @@
 #' @param url Website URL
 #' @param page Page number
 #' @param limit Number of item by page
+#' @param token Bearer token
 #'
 #' @keywords internal
 #'
 #' @importFrom httr2 request req_perform resp_body_json
 #'
-get_users_page <- function(url, page, limit) {
+get_users_page <- function(url, page, limit, token) {
   # request page
   req_request <-
     request(paste0(url, "/api/users/?limit=", limit, "&page=", page)) |>
+    req_auth_bearer_token(token = token) |>
     req_perform() |>
     resp_body_json()
 
@@ -24,6 +26,7 @@ get_users_page <- function(url, page, limit) {
 #'
 #' @param url Website URL
 #' @param limit Number of item by page
+#' @param token Bearer token
 #'
 #' @return A dataframe with users data
 #' @export
@@ -33,10 +36,11 @@ get_users_page <- function(url, page, limit) {
 #' @importFrom purrr map
 #' @importFrom httr2 request req_perform resp_body_json
 #'
-get_users <- function(url, limit = 100) {
+get_users <- function(url, limit = 100, token) {
   # init step -> get number of request to do
   param_request <-
     request(paste0(url, "/api/users/?limit=1&page=1")) |>
+    req_auth_bearer_token(token = token) |>
     req_perform() |>
     resp_body_json()
 
@@ -49,7 +53,8 @@ get_users <- function(url, limit = 100) {
     \(x)get_users_page(
       url = url,
       page = x,
-      limit = limit
+      limit = limit,
+      token = token
     ),
     .progress = TRUE
   ) |>

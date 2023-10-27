@@ -4,12 +4,14 @@
 \alias{get_collection_params}
 \title{Get number of items in collection}
 \usage{
-get_collection_params(url, collection)
+get_collection_params(url, collection, token)
 }
 \arguments{
 \item{url}{Website URL}
 
 \item{collection}{Collection name}
+
+\item{token}{Bearer token}
 }
 \description{
 Get number of items in collection

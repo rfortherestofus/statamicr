@@ -4,12 +4,14 @@
 \alias{get_users}
 \title{Get all users}
 \usage{
-get_users(url, limit = 100)
+get_users(url, limit = 100, token)
 }
 \arguments{
 \item{url}{Website URL}
 
 \item{limit}{Number of item by page}
+
+\item{token}{Bearer token}
 }
 \value{
 A dataframe with users data

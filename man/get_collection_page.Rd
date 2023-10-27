@@ -4,7 +4,7 @@
 \alias{get_collection_page}
 \title{Get collection for one page}
 \usage{
-get_collection_page(url, collection, page, limit)
+get_collection_page(url, collection, page, limit, token)
 }
 \arguments{
 \item{url}{Website URL}
@@ -14,6 +14,8 @@ get_collection_page(url, collection, page, limit)
 \item{page}{Page number}
 
 \item{limit}{Number of item by page}
+
+\item{token}{Bearer token}
 }
 \description{
 Get collection for one page

@@ -4,7 +4,7 @@
 \alias{get_collection_list}
 \title{Get ID and titles of items in collection}
 \usage{
-get_collection_list(url, collection, custom_fields = "")
+get_collection_list(url, collection, custom_fields = "", token)
 }
 \arguments{
 \item{url}{Website URL}
@@ -12,6 +12,8 @@ get_collection_list(url, collection, custom_fields = "")
 \item{collection}{Collection name}
 
 \item{custom_fields}{Custom fiels added, separated by , (also for the start)}
+
+\item{token}{Bearer token}
 }
 \value{
 A dataframe with fields

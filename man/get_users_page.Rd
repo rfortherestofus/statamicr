@@ -4,7 +4,7 @@
 \alias{get_users_page}
 \title{Get users for one page}
 \usage{
-get_users_page(url, page, limit)
+get_users_page(url, page, limit, token)
 }
 \arguments{
 \item{url}{Website URL}
@@ -12,6 +12,8 @@ get_users_page(url, page, limit)
 \item{page}{Page number}
 
 \item{limit}{Number of item by page}
+
+\item{token}{Bearer token}
 }
 \description{
 Get users for one page
