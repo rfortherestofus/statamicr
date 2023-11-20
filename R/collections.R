@@ -20,8 +20,8 @@ get_collection_params <- function(url, collection, token) {
     req_auth_bearer_token(token = token) |>
     # Rate limit is 60 requests per minute
     # https://statamic.dev/rest-api
-    # I set it slightly below this to be safe
-    httr2::req_throttle(rate = 50 / 60) |>
+    # I set it well below this to be safe
+    httr2::req_throttle(rate = 30 / 60) |>
     req_perform() |>
     resp_body_json()
 
