@@ -4,7 +4,7 @@
 \alias{get_users_page}
 \title{Get users for one page}
 \usage{
-get_users_page(url, page, limit, token)
+get_users_page(url, page, limit, token, rate = 50/60)
 }
 \arguments{
 \item{url}{Website URL}
@@ -14,6 +14,8 @@ get_users_page(url, page, limit, token)
 \item{limit}{Number of item by page}
 
 \item{token}{Bearer token}
+
+\item{rate}{Rate limit, default to 50 per minute}
 }
 \description{
 Get users for one page

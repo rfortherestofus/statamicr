@@ -4,7 +4,7 @@
 \alias{get_collection}
 \title{Get all entries in a collection}
 \usage{
-get_collection(url, collection, limit = 10, token)
+get_collection(url, collection, limit = 10, token, rate = 50/60)
 }
 \arguments{
 \item{url}{Website URL}
@@ -14,6 +14,8 @@ get_collection(url, collection, limit = 10, token)
 \item{limit}{Number of item by page}
 
 \item{token}{Bearer token}
+
+\item{rate}{Rate limit, default to 50 per minute}
 }
 \value{
 A dataframe with users data

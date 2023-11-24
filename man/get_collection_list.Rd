@@ -4,7 +4,7 @@
 \alias{get_collection_list}
 \title{Get ID and titles of items in collection}
 \usage{
-get_collection_list(url, collection, custom_fields = "", token)
+get_collection_list(url, collection, custom_fields = "", token, rate = 50/60)
 }
 \arguments{
 \item{url}{Website URL}
@@ -14,6 +14,8 @@ get_collection_list(url, collection, custom_fields = "", token)
 \item{custom_fields}{Custom fiels added, separated by , (also for the start)}
 
 \item{token}{Bearer token}
+
+\item{rate}{Rate limit, default to 50 per minute}
 }
 \value{
 A dataframe with fields

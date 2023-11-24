@@ -4,7 +4,7 @@
 \alias{get_collection_params}
 \title{Get number of items in collection}
 \usage{
-get_collection_params(url, collection, token)
+get_collection_params(url, collection, token, rate = 50/60)
 }
 \arguments{
 \item{url}{Website URL}
@@ -12,6 +12,8 @@ get_collection_params(url, collection, token)
 \item{collection}{Collection name}
 
 \item{token}{Bearer token}
+
+\item{rate}{Rate limit, default to 50 per minute}
 }
 \description{
 Get number of items in collection
