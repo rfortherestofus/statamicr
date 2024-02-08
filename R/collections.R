@@ -102,18 +102,17 @@ get_collection <-
       )
 
     # request all pages
-    json_collection <-  purrr::map(
-      seq(1, nb_items / limit + 1, 1),
-      \(x)get_collection_page(
-        url = url,
-        collection = collection,
-        page = x,
-        limit = limit,
-        token = token,
-        rate = rate
-      ),
-      .progress = TRUE
-    ) |>
+    json_collection <-  purrr::map(seq(1, nb_items / limit + 1, 1),
+                                   \(x)try(get_collection_page(
+                                     url = url,
+                                     collection = collection,
+                                     page = x,
+                                     limit = limit,
+                                     token = token,
+                                     rate = rate
+                                   ))
+                                   ,
+                                   .progress = TRUE) |>
       unlist(recursive = FALSE)
 
     # format
