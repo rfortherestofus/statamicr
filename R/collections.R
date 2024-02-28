@@ -77,6 +77,7 @@ get_collection_page <-
 #' @param limit Number of item by page
 #' @param token Bearer token
 #' @param rate Rate limit, default to 50 per minute
+#' @param start_page start page
 #'
 #' @return A dataframe with users data
 #' @export
@@ -91,7 +92,8 @@ get_collection <-
            collection,
            limit = 10,
            token,
-           rate = 50 / 60) {
+           rate = 50 / 60,
+           start_page = 1) {
     # init step -> get number of request to do
     nb_items <-
       get_collection_params(
@@ -102,7 +104,7 @@ get_collection <-
       )
 
     # request all pages
-    json_collection <-  purrr::map(seq(1, nb_items / limit + 1, 1),
+    json_collection <-  purrr::map(seq(start_page, nb_items / limit + 1, 1),
                                    \(x)try(get_collection_page(
                                      url = url,
                                      collection = collection,
