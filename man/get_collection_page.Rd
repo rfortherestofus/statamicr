@@ -19,7 +19,9 @@ get_collection_page(url, collection, page, limit, token, rate = 50/60)
 
 \item{rate}{Rate limit, default to 50 per minute}
 }
+\value{
+A dataframe with users data
+}
 \description{
 Get collection for one page
 }
-\keyword{internal}

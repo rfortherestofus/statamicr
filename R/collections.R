@@ -37,7 +37,8 @@ get_collection_params <-
 #' @param token Bearer token
 #' @param rate Rate limit, default to 50 per minute
 #'
-#' @keywords internal
+#' @return A dataframe with users data
+#' @export
 #'
 #' @importFrom httr2 request req_perform resp_body_json req_auth_bearer_token req_throttle
 #'
