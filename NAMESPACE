@@ -3,6 +3,7 @@
 export(get_collection)
 export(get_collection_list)
 export(get_collection_page)
+export(get_orders)
 export(get_users)
 importFrom(dplyr,mutate)
 importFrom(httr2,req_auth_bearer_token)
