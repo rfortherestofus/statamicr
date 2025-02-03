@@ -105,22 +105,21 @@ get_collection <-
       )
 
     # request all pages
-    json_collection <-  purrr::map(seq(start_page, nb_items / limit + 1, 1),
-                                   \(x)try(get_collection_page(
-                                     url = url,
-                                     collection = collection,
-                                     page = x,
-                                     limit = limit,
-                                     token = token,
-                                     rate = rate
-                                   ))
-                                   ,
-                                   .progress = TRUE) |>
+    json_collection <-  purrr::map(seq(start_page, nb_items / limit + 1, 1), \(x)try(get_collection_page(
+      url = url,
+      collection = collection,
+      page = x,
+      limit = limit,
+      token = token,
+      rate = rate
+    ))
+    , .progress = TRUE) |>
       unlist(recursive = FALSE)
 
     # format
     tibble::tibble(col = json_collection) |>
-      tidyr::unnest_wider(col)
+      tidyr::unnest_wider(col, names_sep = "_") |>
+      rename_with(\(x)str_remove(x, "col_"), .cols = everything())
   }
 
 
@@ -166,6 +165,5 @@ get_collection_list <-
     # format
     tibble::tibble(col = json_collection_list$data) |>
       tidyr::unnest_wider(col) |>
-      dplyr::mutate(id = purrr::map_chr(.data$id,
-                                        as.character))
+      dplyr::mutate(id = purrr::map_chr(.data$id, as.character))
   }
